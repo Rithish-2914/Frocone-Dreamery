@@ -68,12 +68,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link href="/menu">
                 <Button size="lg" className="w-full sm:w-auto text-lg">
-                  Order Now <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-              <Link href="/menu">
-                <Button variant="glass" size="lg" className="w-full sm:w-auto text-lg">
-                  Explore Flavours
+                  Explore Flavours <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
             </div>

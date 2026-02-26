@@ -90,15 +90,6 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         <p className="text-sm text-gray-500 mb-6 flex-grow line-clamp-2">
           {product.description}
         </p>
-
-        <Button 
-          onClick={handleAdd}
-          className="w-full mt-auto" 
-          variant={isHovered ? "primary" : "secondary"}
-        >
-          <ShoppingBag className="w-4 h-4 mr-2" />
-          Add to Cart
-        </Button>
       </div>
     </motion.div>
   );

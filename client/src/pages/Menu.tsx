@@ -30,7 +30,7 @@ export default function Menu() {
         <div className="text-center mb-12">
           <h1 className="font-display text-5xl md:text-6xl font-bold mb-4">Our Menu</h1>
           <p className="text-gray-500 text-lg max-w-2xl mx-auto">
-            Discover a world of creamy perfection. Filter by your cravings.
+            Discover a world of creamy perfection.
           </p>
         </div>
 

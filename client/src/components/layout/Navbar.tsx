@@ -69,18 +69,6 @@ export function Navbar() {
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <button 
-              onClick={() => setIsOpen(true)}
-              className="relative p-2 rounded-full hover:bg-[hsl(var(--primary))/0.1] transition-colors text-[hsl(var(--foreground))]"
-            >
-              <ShoppingBag className="w-6 h-6" />
-              {cartCount() > 0 && (
-                <span className="absolute top-0 right-0 w-5 h-5 bg-[hsl(var(--primary))] text-white text-xs font-bold rounded-full flex items-center justify-center transform translate-x-1 -translate-y-1">
-                  {cartCount()}
-                </span>
-              )}
-            </button>
-
             {/* Mobile Menu Toggle */}
             <button 
               className="md:hidden p-2 text-gray-600"
