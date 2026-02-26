@@ -56,6 +56,45 @@ export const ordersRelations = relations(orders, ({ }) => ({}));
 export const contactInquiriesRelations = relations(contactInquiries, ({ }) => ({}));
 export const testimonialsRelations = relations(testimonials, ({ }) => ({}));
 
+export const blogs = pgTable("blogs", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  content: text("content").notNull(),
+  author: text("author").notNull(),
+  imageUrl: text("image_url").notNull(),
+  excerpt: text("excerpt").notNull(),
+  category: text("category").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const faqs = pgTable("faqs", {
+  id: serial("id").primaryKey(),
+  question: text("question").notNull(),
+  answer: text("answer").notNull(),
+  category: text("category").notNull(),
+});
+
+export const fests = pgTable("fests", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  college: text("college").notNull(),
+  description: text("description").notNull(),
+  date: text("date").notNull(),
+  imageUrl: text("image_url").notNull(),
+  contactPerson: text("contact_person"),
+});
+
+export const insertBlogSchema = createInsertSchema(blogs).omit({ id: true, createdAt: true });
+export const insertFaqSchema = createInsertSchema(faqs).omit({ id: true });
+export const insertFestSchema = createInsertSchema(fests).omit({ id: true });
+
+export type Blog = typeof blogs.$inferSelect;
+export type InsertBlog = z.infer<typeof insertBlogSchema>;
+export type Faq = typeof faqs.$inferSelect;
+export type InsertFaq = z.infer<typeof insertFaqSchema>;
+export type Fest = typeof fests.$inferSelect;
+export type InsertFest = z.infer<typeof insertFestSchema>;
+
 export const insertProductSchema = createInsertSchema(products).omit({ id: true, createdAt: true });
 export const insertOrderSchema = createInsertSchema(orders).omit({ id: true, createdAt: true, status: true });
 export const insertContactInquirySchema = createInsertSchema(contactInquiries).omit({ id: true, createdAt: true, status: true });

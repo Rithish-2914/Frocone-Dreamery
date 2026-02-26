@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useProducts } from "@/hooks/use-products";
 import { ProductCard } from "@/components/ui/ProductCard";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 const CATEGORIES = ["All", "Scoops", "Sundaes", "Shakes", "Waffles", "Brownies"];
 

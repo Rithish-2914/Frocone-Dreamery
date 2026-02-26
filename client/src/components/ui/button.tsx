@@ -1,62 +1,60 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
-
-import { cn } from "@/lib/utils"
+import { forwardRef } from "react";
+import { cn } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { cva, type VariantProps } from "class-variance-authority";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0" +
-  " hover-elevate active-elevate-2",
+  "inline-flex items-center justify-center font-semibold transition-all duration-300 ease-out active:scale-95 disabled:opacity-50 disabled:pointer-events-none rounded-full",
   {
     variants: {
       variant: {
-        default:
-          "bg-primary text-primary-foreground border border-primary-border",
-        destructive:
-          "bg-destructive text-destructive-foreground border border-destructive-border",
-        outline:
-          // Shows the background color of whatever card / sidebar / accent background it is inside of.
-          // Inherits the current text color.
-          " border [border-color:var(--button-outline)]  shadow-xs active:shadow-none ",
-        secondary: "border bg-secondary text-secondary-foreground border border-secondary-border ",
-        // Add a transparent border so that when someone toggles a border on later, it doesn't shift layout/size.
-        ghost: "border border-transparent",
+        primary: "bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--primary))] text-white shadow-soft hover:shadow-hover hover:-translate-y-0.5 border border-white/20",
+        secondary: "bg-[hsl(var(--secondary))] text-[hsl(var(--foreground))] shadow-soft hover:shadow-hover hover:-translate-y-0.5",
+        outline: "border-2 border-[hsl(var(--primary))] text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))/0.1]",
+        ghost: "text-[hsl(var(--foreground))] hover:bg-black/5",
+        glass: "bg-white/50 backdrop-blur-md border border-white/40 text-[hsl(var(--foreground))] shadow-sm hover:bg-white/80",
+        default: "bg-primary text-primary-foreground", // fallback for standard shadcn
       },
-      // Heights are set as "min" heights, because sometimes Ai will place large amount of content
-      // inside buttons. With a min-height they will look appropriate with small amounts of content,
-      // but will expand to fit large amounts of content.
       size: {
-        default: "min-h-9 px-4 py-2",
-        sm: "min-h-8 rounded-md px-3 text-xs",
-        lg: "min-h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        sm: "px-4 py-2 text-sm",
+        md: "px-6 py-3 text-base",
+        lg: "px-8 py-4 text-lg",
+        icon: "w-10 h-10 p-0",
+        default: "px-6 py-3 text-base", // fallback for standard shadcn
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: "primary",
+      size: "md",
     },
-  },
-)
+  }
+);
 
-export interface ButtonProps
+export interface ButtonProps 
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  asChild?: boolean
+  isLoading?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, isLoading, children, disabled, ...props }, ref) => {
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+      <button
         ref={ref}
+        disabled={disabled || isLoading}
+        className={cn(buttonVariants({ variant, size, className }))}
         {...props}
-      />
-    )
-  },
-)
-Button.displayName = "Button"
+      >
+        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        {children}
+      </button>
+    );
+  }
+);
 
-export { Button, buttonVariants }
+Button.displayName = "Button";
+
+export const MotionButton = motion.create(Button);
+
+export { Button, buttonVariants };

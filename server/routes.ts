@@ -40,7 +40,7 @@ export async function registerRoutes(
   app.post(api.orders.create.path, async (req, res) => {
     try {
       const bodySchema = api.orders.create.input.extend({
-        totalAmount: z.coerce.number(),
+        totalAmount: z.coerce.string(),
       });
       const input = bodySchema.parse(req.body);
       const order = await storage.createOrder(input);
@@ -81,6 +81,33 @@ export async function registerRoutes(
     }
   });
 
+  app.get(api.blogs.list.path, async (req, res) => {
+    try {
+      const blogsList = await storage.getBlogs();
+      res.json(blogsList);
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to fetch blogs' });
+    }
+  });
+
+  app.get(api.faqs.list.path, async (req, res) => {
+    try {
+      const faqsList = await storage.getFaqs();
+      res.json(faqsList);
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to fetch FAQs' });
+    }
+  });
+
+  app.get(api.fests.list.path, async (req, res) => {
+    try {
+      const festsList = await storage.getFests();
+      res.json(festsList);
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to fetch fests' });
+    }
+  });
+
   await seedDatabase();
 
   return httpServer;
@@ -91,13 +118,13 @@ async function seedDatabase() {
     const existingProducts = await storage.getProducts();
     
     if (existingProducts.length === 0) {
-      const products = [
+      const productsData = [
         {
           name: "Classic Vanilla Dream",
           description: "Rich Madagascar vanilla in premium cream. Pure bliss in every scoop.",
           category: "Scoops",
           price: "120",
-          imageUrl: "/api/placeholder/400/300",
+          imageUrl: "https://images.unsplash.com/photo-1570197788417-0e93323c93bf?w=800",
           flavorNotes: "Creamy, sweet vanilla with hints of caramel",
           isSpecial: false,
           isTrending: true,
@@ -109,7 +136,7 @@ async function seedDatabase() {
           description: "Dark Belgian chocolate with chunks of fudgy brownies.",
           category: "Scoops",
           price: "140",
-          imageUrl: "/api/placeholder/400/300",
+          imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
           flavorNotes: "Rich chocolate, gooey brownie chunks",
           isSpecial: false,
           isTrending: true,
@@ -121,7 +148,7 @@ async function seedDatabase() {
           description: "Fresh Alphonso mango pulp swirled into creamy goodness.",
           category: "Scoops",
           price: "130",
-          imageUrl: "/api/placeholder/400/300",
+          imageUrl: "https://images.unsplash.com/photo-1590085423125-673e1dc1938b?w=800",
           flavorNotes: "Sweet tropical mango, smooth and fruity",
           isSpecial: true,
           isTrending: false,
@@ -129,59 +156,11 @@ async function seedDatabase() {
           badge: "Limited Edition",
         },
         {
-          name: "Mint Chocolate Chip",
-          description: "Cool mint ice cream studded with dark chocolate chips.",
-          category: "Scoops",
-          price: "135",
-          imageUrl: "/api/placeholder/400/300",
-          flavorNotes: "Refreshing mint, crunchy chocolate",
-          isSpecial: false,
-          isTrending: false,
-          isFavorite: false,
-          badge: null,
-        },
-        {
-          name: "Strawberry Cheesecake",
-          description: "Creamy cheesecake ice cream with strawberry swirls and graham cracker crumbs.",
-          category: "Scoops",
-          price: "150",
-          imageUrl: "/api/placeholder/400/300",
-          flavorNotes: "Tangy cheesecake, sweet berries, buttery crust",
-          isSpecial: true,
-          isTrending: true,
-          isFavorite: true,
-          badge: "Limited Edition",
-        },
-        {
-          name: "Hot Fudge Sundae",
-          description: "Three scoops topped with hot fudge, whipped cream, and a cherry.",
-          category: "Sundaes",
-          price: "220",
-          imageUrl: "/api/placeholder/400/300",
-          flavorNotes: "Warm fudge, cold cream, perfect contrast",
-          isSpecial: false,
-          isTrending: true,
-          isFavorite: false,
-          badge: "Customer Favorite",
-        },
-        {
-          name: "Cookie Monster Sundae",
-          description: "Vanilla and chocolate ice cream loaded with cookies and cookie dough.",
-          category: "Sundaes",
-          price: "240",
-          imageUrl: "/api/placeholder/400/300",
-          flavorNotes: "Cookie heaven, crunchy and creamy",
-          isSpecial: false,
-          isTrending: false,
-          isFavorite: true,
-          badge: null,
-        },
-        {
           name: "Oreo Shake",
           description: "Thick milkshake blended with Oreo cookies and vanilla ice cream.",
           category: "Shakes",
           price: "180",
-          imageUrl: "/api/placeholder/400/300",
+          imageUrl: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=800",
           flavorNotes: "Cookies and cream, smooth and thick",
           isSpecial: false,
           isTrending: true,
@@ -189,100 +168,103 @@ async function seedDatabase() {
           badge: "Trending Now",
         },
         {
-          name: "Chocolate Peanut Butter Shake",
-          description: "Rich chocolate shake with creamy peanut butter swirl.",
-          category: "Shakes",
-          price: "190",
-          imageUrl: "/api/placeholder/400/300",
-          flavorNotes: "Chocolate-peanut butter perfection",
-          isSpecial: false,
-          isTrending: false,
-          isFavorite: false,
-          badge: null,
-        },
-        {
-          name: "Berry Blast Shake",
-          description: "Mixed berry shake with strawberry, blueberry, and raspberry.",
-          category: "Shakes",
-          price: "185",
-          imageUrl: "/api/placeholder/400/300",
-          flavorNotes: "Fresh berries, tangy and sweet",
-          isSpecial: true,
-          isTrending: false,
-          isFavorite: false,
-          badge: "Only Available This Week",
-        },
-        {
           name: "Belgian Waffle",
           description: "Crispy waffle topped with ice cream, whipped cream, and syrup.",
           category: "Waffles",
           price: "200",
-          imageUrl: "/api/placeholder/400/300",
+          imageUrl: "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=800",
           flavorNotes: "Warm waffle, cold ice cream, maple syrup",
           isSpecial: false,
           isTrending: false,
           isFavorite: true,
           badge: null,
-        },
-        {
-          name: "Nutella Waffle",
-          description: "Golden waffle drizzled with Nutella and topped with vanilla ice cream.",
-          category: "Waffles",
-          price: "220",
-          imageUrl: "/api/placeholder/400/300",
-          flavorNotes: "Hazelnut chocolate, crispy waffle",
-          isSpecial: false,
-          isTrending: true,
-          isFavorite: false,
-          badge: "Customer Favorite",
-        },
-        {
-          name: "Death by Chocolate Brownie",
-          description: "Warm fudgy brownie topped with chocolate ice cream and hot fudge.",
-          category: "Brownies",
-          price: "210",
-          imageUrl: "/api/placeholder/400/300",
-          flavorNotes: "Triple chocolate overload, gooey and rich",
-          isSpecial: false,
-          isTrending: true,
-          isFavorite: true,
-          badge: "Trending Now",
-        },
-        {
-          name: "Caramel Brownie Delight",
-          description: "Brownie with vanilla ice cream, caramel sauce, and pecans.",
-          category: "Brownies",
-          price: "215",
-          imageUrl: "/api/placeholder/400/300",
-          flavorNotes: "Sweet caramel, crunchy pecans, fudgy brownie",
-          isSpecial: false,
-          isTrending: false,
-          isFavorite: false,
-          badge: null,
-        },
-        {
-          name: "Red Velvet Brownie",
-          description: "Red velvet brownie with cream cheese ice cream and white chocolate.",
-          category: "Brownies",
-          price: "225",
-          imageUrl: "/api/placeholder/400/300",
-          flavorNotes: "Tangy cream cheese, sweet red velvet",
-          isSpecial: true,
-          isTrending: false,
-          isFavorite: false,
-          badge: "Limited Edition",
-        },
+        }
       ];
 
-      for (const product of products) {
+      for (const product of productsData) {
         await storage.createProduct(product);
       }
+    }
 
+    // Seed Blogs
+    const existingBlogs = await storage.getBlogs();
+    if (existingBlogs.length === 0) {
+      const blogsData = [
+        {
+          title: "The Art of Making Perfect Artisanal Ice Cream",
+          content: "Learn the secrets behind our creamy textures and unique flavor profiles...",
+          author: "Chef Antonio",
+          imageUrl: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=800",
+          excerpt: "Discover the craftsmanship that goes into every scoop at Frocone.",
+          category: "Behind the Scenes"
+        },
+        {
+          title: "Top 5 Summer Flavors You Must Try",
+          content: "From Mango Tango to Berry Blast, here are our top picks for the heat...",
+          author: "Sarah J.",
+          imageUrl: "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=800",
+          excerpt: "Cool down with our refreshing seasonal specialties.",
+          category: "Recommendations"
+        }
+      ];
+      for (const blog of blogsData) {
+        await storage.createBlog(blog);
+      }
+    }
+
+    // Seed FAQs
+    const existingFaqs = await storage.getFaqs();
+    if (existingFaqs.length === 0) {
+      const faqsData = [
+        {
+          question: "Do you offer vegan options?",
+          answer: "Yes! We have a range of fruit-based sorbets that are 100% vegan.",
+          category: "Dietary"
+        },
+        {
+          question: "Do you cater for events?",
+          answer: "Absolutely! We love being part of fests and college events. Contact us for bulk orders.",
+          category: "General"
+        }
+      ];
+      for (const faq of faqsData) {
+        await storage.createFaq(faq);
+      }
+    }
+
+    // Seed Fests
+    const existingFests = await storage.getFests();
+    if (existingFests.length === 0) {
+      const festsData = [
+        {
+          name: "ATMOS 2024",
+          college: "BITS Pilani, Hyderabad",
+          description: "Technical fest with amazing workshops and competitions.",
+          date: "October 18-20, 2024",
+          imageUrl: "https://images.unsplash.com/photo-1540575861501-7ad0582371f3?w=800",
+          contactPerson: "Student Council"
+        },
+        {
+          name: "Pearl 2024",
+          college: "BITS Pilani, Hyderabad",
+          description: "Cultural extravaganza with concerts and dance battles.",
+          date: "March 15-17, 2024",
+          imageUrl: "https://images.unsplash.com/photo-1459749411177-042180ceea72?w=800",
+          contactPerson: "Cultural Committee"
+        }
+      ];
+      for (const fest of festsData) {
+        await storage.createFest(fest);
+      }
+    }
+
+    const existingTestimonials = await storage.getTestimonials();
+    if (existingTestimonials.length === 0) {
       const testimonialsData = [
         {
           customerName: "Priya Sharma",
           rating: 5,
-          comment: "Best ice cream in Hyderabad! The mango tango is absolutely divine. Can't stop coming back!",
+          comment: "Best ice cream in Hyderabad! The mango tango is absolutely divine.",
           avatar: null,
           isVerified: true,
         },
@@ -292,39 +274,15 @@ async function seedDatabase() {
           comment: "The brownie sundae is heaven on a plate. Perfect spot for dessert dates!",
           avatar: null,
           isVerified: true,
-        },
-        {
-          customerName: "Ananya Singh",
-          rating: 5,
-          comment: "Love the vibe and the quality! Every scoop hits different indeed. My go-to dessert place.",
-          avatar: null,
-          isVerified: true,
-        },
-        {
-          customerName: "Karthik Reddy",
-          rating: 4,
-          comment: "Amazing flavors and great service. The waffles are crispy and delicious!",
-          avatar: null,
-          isVerified: true,
-        },
-        {
-          customerName: "Sneha Patel",
-          rating: 5,
-          comment: "Instagram-worthy presentation and tastes even better! Highly recommend the chocolate fudge brownie.",
-          avatar: null,
-          isVerified: true,
-        },
+        }
       ];
 
       for (const testimonialData of testimonialsData) {
-        const [existing] = await db.select().from(testimonials).where(eq(testimonials.customerName, testimonialData.customerName));
-        if (!existing) {
-          await db.insert(testimonials).values(testimonialData);
-        }
+        await db.insert(testimonials).values(testimonialData);
       }
-
-      console.log("✅ Database seeded successfully with products and testimonials!");
     }
+
+    console.log("✅ Database seeded successfully!");
   } catch (error) {
     console.error("Error seeding database:", error);
   }

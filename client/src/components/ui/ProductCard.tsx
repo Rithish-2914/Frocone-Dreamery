@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingBag, Plus, Sparkles } from "lucide-react";
 import { cn, formatPrice } from "@/lib/utils";
 import { useCart } from "@/store/use-cart";
-import { Button } from "./Button";
+import { Button } from "./button";
 import type { Product } from "@shared/schema";
 
 interface ProductCardProps {

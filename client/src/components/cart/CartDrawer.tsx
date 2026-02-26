@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight } from "lucide-react";
 import { useCart } from "@/store/use-cart";
 import { useCreateOrder } from "@/hooks/use-orders";
-import { formatPrice } from "@/lib/utils";
-import { Button } from "../ui/Button";
+import { formatPrice, cn } from "@/lib/utils";
+import { Button } from "../ui/button";
 
 export function CartDrawer() {
   const { items, isOpen, setIsOpen, updateQuantity, removeItem, cartTotal, clearCart } = useCart();

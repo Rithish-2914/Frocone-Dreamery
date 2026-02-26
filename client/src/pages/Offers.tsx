@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Clock, Tag } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 export default function Offers() {
   return (

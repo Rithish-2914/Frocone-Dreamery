@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useSubmitContact } from "@/hooks/use-contact";
 
 export default function Contact() {

@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, Star, Instagram } from "lucide-react";
-import { Button, MotionButton } from "@/components/ui/Button";
+import { Button, MotionButton } from "@/components/ui/button";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { useProducts } from "@/hooks/use-products";
 import { useTestimonials } from "@/hooks/use-testimonials";

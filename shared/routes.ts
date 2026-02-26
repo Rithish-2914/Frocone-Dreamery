@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { insertProductSchema, insertOrderSchema, insertContactInquirySchema } from './schema';
+import { insertProductSchema, insertOrderSchema, insertContactInquirySchema, insertBlogSchema, insertFaqSchema, insertFestSchema } from './schema';
 
 export const errorSchemas = {
   validation: z.object({
@@ -68,6 +68,33 @@ export const api = {
       },
     },
   },
+  blogs: {
+    list: {
+      method: 'GET' as const,
+      path: '/api/blogs' as const,
+      responses: {
+        200: z.array(z.any()),
+      },
+    },
+  },
+  faqs: {
+    list: {
+      method: 'GET' as const,
+      path: '/api/faqs' as const,
+      responses: {
+        200: z.array(z.any()),
+      },
+    },
+  },
+  fests: {
+    list: {
+      method: 'GET' as const,
+      path: '/api/fests' as const,
+      responses: {
+        200: z.array(z.any()),
+      },
+    },
+  },
 };
 
 export function buildUrl(path: string, params?: Record<string, string | number>): string {
@@ -85,3 +112,6 @@ export function buildUrl(path: string, params?: Record<string, string | number>)
 export type ProductInput = z.infer<typeof insertProductSchema>;
 export type OrderInput = z.infer<typeof insertOrderSchema>;
 export type ContactInput = z.infer<typeof insertContactInquirySchema>;
+export type BlogInput = z.infer<typeof insertBlogSchema>;
+export type FaqInput = z.infer<typeof insertFaqSchema>;
+export type FestInput = z.infer<typeof insertFestSchema>;

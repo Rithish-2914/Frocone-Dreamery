@@ -4,6 +4,9 @@ import {
   orders,
   contactInquiries,
   testimonials,
+  blogs,
+  faqs,
+  fests,
   type Product,
   type InsertProduct,
   type CreateOrderRequest,
@@ -12,6 +15,12 @@ import {
   type ContactResponse,
   type TestimonialResponse,
   type ProductsQueryParams,
+  type Blog,
+  type InsertBlog,
+  type Faq,
+  type InsertFaq,
+  type Fest,
+  type InsertFest,
 } from "@shared/schema";
 import { eq, and } from "drizzle-orm";
 
@@ -22,6 +31,12 @@ export interface IStorage {
   createOrder(order: CreateOrderRequest): Promise<OrderResponse>;
   createContactInquiry(inquiry: CreateContactRequest): Promise<ContactResponse>;
   getTestimonials(): Promise<TestimonialResponse[]>;
+  getBlogs(): Promise<Blog[]>;
+  getFaqs(): Promise<Faq[]>;
+  getFests(): Promise<Fest[]>;
+  createBlog(blog: InsertBlog): Promise<Blog>;
+  createFaq(faq: InsertFaq): Promise<Faq>;
+  createFest(fest: InsertFest): Promise<Fest>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -67,6 +82,33 @@ export class DatabaseStorage implements IStorage {
 
   async getTestimonials(): Promise<TestimonialResponse[]> {
     return await db.select().from(testimonials).orderBy(testimonials.createdAt);
+  }
+
+  async getBlogs(): Promise<Blog[]> {
+    return await db.select().from(blogs).orderBy(blogs.createdAt);
+  }
+
+  async getFaqs(): Promise<Faq[]> {
+    return await db.select().from(faqs);
+  }
+
+  async getFests(): Promise<Fest[]> {
+    return await db.select().from(fests);
+  }
+
+  async createBlog(blog: InsertBlog): Promise<Blog> {
+    const [result] = await db.insert(blogs).values(blog).returning();
+    return result;
+  }
+
+  async createFaq(faq: InsertFaq): Promise<Faq> {
+    const [result] = await db.insert(faqs).values(faq).returning();
+    return result;
+  }
+
+  async createFest(fest: InsertFest): Promise<Fest> {
+    const [result] = await db.insert(fests).values(fest).returning();
+    return result;
   }
 }
 
