@@ -81,9 +81,20 @@ export default {
           busy: "rgb(239 68 68)",
           offline: "rgb(156 163 175)",
         },
+        brand: {
+          cream: "#FDFBF7",
+          blue: "#87CEEB",
+          blueLight: "#A8D8EA",
+          skyBlue: "#B8E6F5",
+          brown: "#4A1C1C",
+          brownDark: "#3D1515",
+          red: "#E63946",
+          gold: "#FFD700"
+        },
       },
       fontFamily: {
-        sans: ["var(--font-sans)"],
+        sans: ["'DM Sans'", "sans-serif"],
+        display: ["'Fredoka'", "cursive"],
         serif: ["var(--font-serif)"],
         mono: ["var(--font-mono)"],
       },
