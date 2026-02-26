@@ -317,7 +317,10 @@ async function seedDatabase() {
       ];
 
       for (const testimonialData of testimonialsData) {
-        await db.insert(testimonials).values(testimonialData);
+        const [existing] = await db.select().from(testimonials).where(eq(testimonials.customerName, testimonialData.customerName));
+        if (!existing) {
+          await db.insert(testimonials).values(testimonialData);
+        }
       }
 
       console.log("✅ Database seeded successfully with products and testimonials!");
