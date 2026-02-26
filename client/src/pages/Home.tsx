@@ -56,7 +56,7 @@ export default function Home() {
             
             <h1 className="font-display text-6xl sm:text-7xl lg:text-8xl font-bold text-[hsl(var(--foreground))] leading-[1.1] mb-6">
               Every Scoop <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[hsl(var(--primary))] to-pink-400">
+              <span className="text-[hsl(var(--primary))]">
                 Hits Different
               </span>
             </h1>

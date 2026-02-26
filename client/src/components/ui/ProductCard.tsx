@@ -90,6 +90,13 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         <p className="text-sm text-gray-500 mb-6 flex-grow line-clamp-2">
           {product.description}
         </p>
+        <Button 
+          onClick={() => window.open(`https://wa.me/919100192750?text=I'm interested in ordering ${product.name}`, '_blank')}
+          className="w-full mt-auto" 
+          variant="primary"
+        >
+          Order Now
+        </Button>
       </div>
     </motion.div>
   );

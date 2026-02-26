@@ -9,8 +9,8 @@ export function Footer() {
           
           <div className="col-span-1 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--secondary))] flex items-center justify-center text-white shadow-soft">
-                <IceCream className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center shadow-soft">
+                <img src="/logo.png" alt="Frocone Logo" className="w-full h-full object-cover" />
               </div>
               <span className="font-display text-2xl font-bold text-[hsl(var(--foreground))]">
                 Frocone <span className="text-[hsl(var(--primary))]">.</span>
@@ -63,7 +63,7 @@ export function Footer() {
               </li>
               <li className="flex justify-between border-b border-gray-100 pb-2">
                 <span>Sat - Sun</span>
-                <span className="font-medium text-[hsl(var(--primary))]">10:00 AM - 12:00 AM</span>
+                <span className="font-medium text-gray-800">10:00 AM - 12:00 AM</span>
               </li>
             </ul>
           </div>

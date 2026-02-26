@@ -12,8 +12,8 @@
     --primary: 197 71% 73%; /* Sky Blue #87CEEB */
     --primary-foreground: 0 50% 18%;
     
-    --secondary: 354 71% 57%; /* Red #E63946 */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 197 71% 73%; /* Match Primary Blue */
+    --secondary-foreground: 0 50% 18%;
 
     --muted: 197 30% 92%;
     --muted-foreground: 0 30% 35%;

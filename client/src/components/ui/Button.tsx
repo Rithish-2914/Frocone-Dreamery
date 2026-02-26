@@ -15,7 +15,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const baseStyles = "inline-flex items-center justify-center font-semibold transition-all duration-300 ease-out active:scale-95 disabled:opacity-50 disabled:pointer-events-none rounded-full";
     
     const variants = {
-      primary: "bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(345,100%,75%)] text-white shadow-soft hover:shadow-hover hover:-translate-y-0.5 border border-white/20",
+      primary: "bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--primary))] text-white shadow-soft hover:shadow-hover hover:-translate-y-0.5 border border-white/20",
       secondary: "bg-[hsl(var(--secondary))] text-[hsl(var(--foreground))] shadow-soft hover:shadow-hover hover:-translate-y-0.5",
       outline: "border-2 border-[hsl(var(--primary))] text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))/0.1]",
       ghost: "text-[hsl(var(--foreground))] hover:bg-black/5",
