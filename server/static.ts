@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 export function serveStatic(app: Express) {
-  const distPath = path.resolve(process.cwd(), "dist", "public");
+  const distPath = path.resolve(process.cwd(), "dist");
   if (!fs.existsSync(distPath)) {
     // Fallback for Vercel environment where paths might differ
     const vercelPath = path.resolve(process.cwd(), "public");

@@ -1,25 +1,26 @@
-# Frocone Creamery - Digital Storefront
-
-A modern, visually appealing web application for an artisanal ice cream creamery located in Hyderabad.
+# Project Overview
+This project is a React-based web application with an Express backend, using Drizzle ORM and PostgreSQL.
 
 ## Tech Stack
-- **Frontend**: React 18, TypeScript, Tailwind CSS, Framer Motion, Radix UI, Wouter, Zustand, React Query.
-- **Backend**: Express.js (v5), Node.js, Drizzle ORM, PostgreSQL (via `pg`).
-- **Validation**: Zod (shared schemas).
+- Frontend: React, Vite, Tailwind CSS, Shadcn UI, Wouter, TanStack Query
+- Backend: Express, Node.js, Tsx
+- Database: PostgreSQL, Drizzle ORM
+- Deployment: Configured for Replit and Vercel
 
-## Features
-- **Artisanal Menu**: Browse scoops, sundaes, shakes, waffles, and brownies.
-- **Blogs**: Stories and behind-the-scenes content.
-- **Fests & Colleges**: Information on campus events and partnerships.
-- **FAQ**: Quick answers to common questions.
-- **Shopping Cart**: Real-time cart management.
-- **Contact & Orders**: Integrated inquiry and ordering system.
+## Project Structure
+- `client/`: Frontend source code
+  - `src/components/`: UI components and layout
+  - `src/pages/`: Application pages
+  - `src/hooks/`: Custom React hooks
+- `server/`: Backend source code
+  - `routes.ts`: API endpoints
+  - `storage.ts`: Database interaction layer
+- `shared/`: Shared code between frontend and backend (e.g., Drizzle schema)
 
-## Replit Integration
-- **Database**: Uses Replit's built-in PostgreSQL.
-- **Workflows**: Configured for development and production.
-- **Environment**: Nix-based Node.js environment.
+## How to Run
+- Development: `npm run dev` (uses `tsx` to run the server which handles Vite middleware)
+- Build: `npm run build` (builds the client assets into `dist/`)
+- Production: `npm run start` (runs the server in production mode)
 
-## Deployment
-- **Replit**: Fully compatible for Replit hosting.
-- **Vercel**: Structured for serverless deployment (client/server separation).
+## Database Setup
+The database schema is defined in `shared/schema.ts`. Tables are automatically initialized and seeded on startup in the development environment.
