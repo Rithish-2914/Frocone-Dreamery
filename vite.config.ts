@@ -9,9 +9,11 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
   plugins: [react()],
   root: 'client',
+  base: '/',
   build: {
     outDir: '../dist',
     emptyOutDir: true,
+    assetsDir: 'assets',
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'client/index.html'),
