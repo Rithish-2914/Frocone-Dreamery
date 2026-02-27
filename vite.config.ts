@@ -7,7 +7,7 @@ export default defineConfig({
     outDir: 'dist', // Set the output directory
     rollupOptions: {
       input: {
-        main: './index.html', // Entry file
+        main: './client/index.html', // Entry file
       },
       output: {
         // Configure output for SPA routing
