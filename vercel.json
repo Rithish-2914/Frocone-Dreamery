@@ -12,6 +12,11 @@
       "dest": "server/index.ts"
     },
     {
+      "src": "/assets/(.*)",
+      "dest": "client/dist/assets/$1",
+      "continue": true
+    },
+    {
       "src": "/(.*)",
       "dest": "server/index.ts"
     }
