@@ -1,23 +1,23 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  root: 'client',
   build: {
-    outDir: 'dist', // Set the output directory
+    outDir: '../dist',
+    emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: './client/index.html', // Entry file
-      },
-      output: {
-        // Configure output for SPA routing
-        entryFileNames: `assets/[name].js`,
-        chunkFileNames: `assets/[name].js`,
-        assetFileNames: `assets/[name].[ext]`,
+        main: path.resolve(__dirname, 'client/index.html'),
       },
     },
   },
-  server: {
-    historyApiFallback: true, // Enable SPA routing
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './client/src'),
+      '@shared': path.resolve(__dirname, './shared'),
+    },
   },
 });
