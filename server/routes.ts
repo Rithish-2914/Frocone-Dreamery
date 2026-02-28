@@ -116,8 +116,12 @@ export async function registerRoutes(
 async function seedDatabase() {
   try {
     const existingProducts = await storage.getProducts();
+    if (existingProducts.length > 0) {
+      // Clear existing products to ensure clean seed with new menu
+      await db.delete(products);
+    }
     
-    if (existingProducts.length === 0) {
+    if (true) {
       const productsData = [
         {
           "name": "Death By Chocolate",
@@ -127,7 +131,7 @@ async function seedDatabase() {
           "imageUrl": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
           "flavorNotes": "Delicious brownies",
           "isSpecial": false,
-          "isTrending": false,
+          "isTrending": true,
           "isFavorite": false,
           "badge": null
         },
@@ -174,10 +178,10 @@ async function seedDatabase() {
           "price": "269",
           "imageUrl": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
           "flavorNotes": "Delicious brownies",
-          "isSpecial": false,
+          "isSpecial": true,
           "isTrending": false,
           "isFavorite": false,
-          "badge": null
+          "badge": "Popular"
         },
         {
           "name": "Vanilla",
