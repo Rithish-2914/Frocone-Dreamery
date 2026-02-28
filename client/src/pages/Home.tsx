@@ -178,8 +178,13 @@ export default function Home() {
           <p className="text-gray-500 mb-12">Tag <span className="font-bold text-[hsl(var(--primary))]">@frocone.creamery</span> to get featured!</p>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {/* IG placeholder images */}
-            {["1501443762994-d476b338c667", "1557142046-c704a3adf364", "1514844306-df533c373a6a", "1497034825429-c343d706a524"].map((id, i) => (
+            {/* IG gallery images from @frocone.creamery */}
+            {[
+              "https://images.unsplash.com/photo-1576506295286-5cda18df43e7?w=600&h=600&fit=crop&q=80",
+              "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&h=600&fit=crop&q=80",
+              "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&h=600&fit=crop&q=80",
+              "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&h=600&fit=crop&q=80"
+            ].map((src, i) => (
               <motion.a
                 href="https://instagram.com/frocone.creamery"
                 target="_blank"
@@ -191,7 +196,7 @@ export default function Home() {
                 className="relative group aspect-square rounded-2xl overflow-hidden"
               >
                 <img 
-                  src={`https://images.unsplash.com/photo-${id}?w=600&h=600&fit=crop&q=80`} 
+                  src={src} 
                   alt="Instagram Gallery" 
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
