@@ -1308,23 +1308,131 @@ async function seedDatabase() {
 
     // Seed Blogs
     const existingBlogs = await storage.getBlogs();
-    if (existingBlogs.length === 0) {
+    if (existingBlogs.length > 0) {
+      await db.delete(blogs);
+    }
+    
+    if (true) {
       const blogsData = [
         {
-          title: "The Art of Making Perfect Artisanal Ice Cream",
-          content: "Learn the secrets behind our creamy textures and unique flavor profiles...",
-          author: "Chef Antonio",
-          imageUrl: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=800",
-          excerpt: "Discover the craftsmanship that goes into every scoop at Frocone.",
-          category: "Behind the Scenes"
+          "title": "Frocone Creamery – The Sweetest Spot in Madhapur, Hyderabad",
+          "content": "If you're in Madhapur and craving something indulgent, Frocone Creamery is your go-to dessert destination. From sizzling brownies to exotic scoops like Rose Cardamom and Paan, every bite is crafted for pure satisfaction.\nWhether you're stepping out after work in HITEC City or hanging out with friends, our menu has something for every mood — creamy scoops starting at ₹99, loaded sundaes, rich thickshakes, and customizable toppings.\n📍 Located in Madhapur, Hyderabad\n💸 Affordable indulgence starting at ₹99",
+          "author": "Frocone Team",
+          "imageUrl": "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=800",
+          "excerpt": "If you're in Madhapur and craving something indulgent, Frocone Creamery is your go-to dessert destination. From sizzling brownies to exotic scoops lik...",
+          "category": "Announcements"
         },
         {
-          title: "Top 5 Summer Flavors You Must Try",
-          content: "From Mango Tango to Berry Blast, here are our top picks for the heat...",
-          author: "Sarah J.",
-          imageUrl: "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=800",
-          excerpt: "Cool down with our refreshing seasonal specialties.",
-          category: "Recommendations"
+          "title": "Top 5 Must-Try Brownies in Hyderabad (And Why Death By Chocolate Wins)",
+          "content": "Brownie lovers, this one's for you.\n🍫 1. Death By Chocolate – ₹249\nLayered, intense, and dangerously addictive.\n🔥 2. Sizzling Brownie – ₹269\nHot brownie + cold scoop = unbeatable contrast.\n🌰 3. Walnut Brownie – ₹119\nCrunch meets fudge.\n🌰 4. Hazelnut Brownie – ₹129\nNutty richness elevated.\n🍪 5. ChocoChip Brownie – ₹119\nClassic, timeless comfort.\nIf you’re in Madhapur, don’t settle for average brownies.",
+          "author": "Frocone Team",
+          "imageUrl": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
+          "excerpt": "Brownie lovers, this one's for you.\n🍫 1. Death By Chocolate – ₹249\nLayered, intense, and dangerously addictive.\n🔥 2. Sizzling Brownie – ₹269\nHot bro...",
+          "category": "Brownies"
+        },
+        {
+          "title": "15 Ice Cream Flavours You Must Try in Hyderabad",
+          "content": "At Frocone, you can go classic or adventurous:\nVanilla – ₹99\nChocolate – ₹109\nDark Chocolate – ₹119\nRed Velvet – ₹119\nSalted Caramel – ₹119\nMango – ₹105\nCoconut – ₹105\nPineapple – ₹105\nBlack Currant – ₹109\nBlueberry – ₹109\nPista – ₹109\nCoffee – ₹109\nStrawberry – ₹109\nRaspberry – ₹109\nRose Cardamom – ₹109\nPaan – ₹109\nHyderabad heat? Solved.",
+          "author": "Frocone Team",
+          "imageUrl": "https://images.unsplash.com/photo-1570197788417-0e93323c93bf?w=800",
+          "excerpt": "At Frocone, you can go classic or adventurous:\nVanilla – ₹99\nChocolate – ₹109\nDark Chocolate – ₹119\nRed Velvet – ₹119\nSalted Caramel – ₹119\nMango – ₹1...",
+          "category": "Flavors"
+        },
+        {
+          "title": "Best Sundaes in Madhapur for Date Nights",
+          "content": "Perfect for sharing (or not 😉):\nClassic Hot Chocolate Fudge – ₹199\nLotus Biscoff – ₹209\nMocha Almond Fudge – ₹209\nClassic Banana Split (Triple) – ₹349\nDark Temptation – ₹199\nRomantic, indulgent, unforgettable.",
+          "author": "Frocone Team",
+          "imageUrl": "https://images.unsplash.com/photo-1580915411954-282cb1b0d780?w=800",
+          "excerpt": "Perfect for sharing (or not 😉):\nClassic Hot Chocolate Fudge – ₹199\nLotus Biscoff – ₹209\nMocha Almond Fudge – ₹209\nClassic Banana Split (Triple) – ₹34...",
+          "category": "Sundaes"
+        },
+        {
+          "title": "Thickshakes vs Milkshakes – What’s the Real Difference?",
+          "content": "Milkshake (₹219): Light, smooth, refreshing\nThickshake (₹259–₹299): Dense, creamy, dessert-level indulgence\nMust-try thickshakes:\nNutella Brownie Thickshake – ₹299\nLotus Biscoff Thickshake – ₹269\nTriple Chocochip – ₹259\nIf you’re really hungry, go thick.",
+          "author": "Frocone Team",
+          "imageUrl": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=800",
+          "excerpt": "Milkshake (₹219): Light, smooth, refreshing\nThickshake (₹259–₹299): Dense, creamy, dessert-level indulgence\nMust-try thickshakes:\nNutella Brownie Thic...",
+          "category": "Shakes"
+        },
+        {
+          "title": "Create Your Own Dream Ice Cream Bowl in Hyderabad",
+          "content": "Choose your scoop.\nAdd toppings:\nOreo – ₹15\nNutella – ₹20\nAlmonds – ₹30\nPista – ₹40\nWhip Cream – ₹20\nWaffle Cone – ₹10\nYour creativity. Your combo. Your rules.",
+          "author": "Frocone Team",
+          "imageUrl": "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=800",
+          "excerpt": "Choose your scoop.\nAdd toppings:\nOreo – ₹15\nNutella – ₹20\nAlmonds – ₹30\nPista – ₹40\nWhip Cream – ₹20\nWaffle Cone – ₹10\nYour creativity. Your combo. Yo...",
+          "category": "Customization"
+        },
+        {
+          "title": "Why Frocone is Perfect for Office Treats in HITEC City",
+          "content": "Corporate celebrations? Team wins?\nOrder sundaes, brownies, or thickshakes with delivery options available in Madhapur.\nAffordable bulk dessert solutions without compromising taste.",
+          "author": "Frocone Team",
+          "imageUrl": "https://images.unsplash.com/photo-1540575861501-7ad0582371f3?w=800",
+          "excerpt": "Corporate celebrations? Team wins?\nOrder sundaes, brownies, or thickshakes with delivery options available in Madhapur.\nAffordable bulk dessert soluti...",
+          "category": "Corporate"
+        },
+        {
+          "title": "Beat Hyderabad Heat with These Cooling Picks",
+          "content": "Top summer picks:\nMango Scoop – ₹105\nCoconut Scoop – ₹105\nBlueberry Delight Sundae – ₹199\nMango Milkshake – ₹219\nStay cool, stay sweet.",
+          "author": "Frocone Team",
+          "imageUrl": "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=800",
+          "excerpt": "Top summer picks:\nMango Scoop – ₹105\nCoconut Scoop – ₹105\nBlueberry Delight Sundae – ₹199\nMango Milkshake – ₹219\nStay cool, stay sweet....",
+          "category": "Summer"
+        },
+        {
+          "title": "Chocolate Lovers’ Ultimate Guide in Madhapur",
+          "content": "If chocolate is your weakness:\nDeath By Chocolate Brownie\nDark Chocolate Scoop\nChocolate Thickshake\nClassic Hot Chocolate Fudge Sundae\nOne visit isn’t enough.",
+          "author": "Frocone Team",
+          "imageUrl": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
+          "excerpt": "If chocolate is your weakness:\nDeath By Chocolate Brownie\nDark Chocolate Scoop\nChocolate Thickshake\nClassic Hot Chocolate Fudge Sundae\nOne visit isn’t...",
+          "category": "Chocolate"
+        },
+        {
+          "title": "Budget-Friendly Desserts Under ₹150 in Hyderabad",
+          "content": "Affordable indulgence:\nVanilla – ₹99\nWalnut Brownie – ₹119\nMango Scoop – ₹105\nCoconut Scoop – ₹105\nAdd waffle cone – ₹10\nPremium taste without premium pricing.",
+          "author": "Frocone Team",
+          "imageUrl": "https://images.unsplash.com/photo-1590085423125-673e1dc1938b?w=800",
+          "excerpt": "Affordable indulgence:\nVanilla – ₹99\nWalnut Brownie – ₹119\nMango Scoop – ₹105\nCoconut Scoop – ₹105\nAdd waffle cone – ₹10\nPremium taste without premium...",
+          "category": "Budget"
+        },
+        {
+          "title": "Exotic Indian Fusion Ice Creams You Must Try",
+          "content": "Rose Cardamom\nPaan\nCoconut Paan Meetha Sundae\nTraditional flavours. Modern twist.",
+          "author": "Frocone Team",
+          "imageUrl": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
+          "excerpt": "Rose Cardamom\nPaan\nCoconut Paan Meetha Sundae\nTraditional flavours. Modern twist....",
+          "category": "Fusion"
+        },
+        {
+          "title": "Best Dessert Combos to Order with Friends",
+          "content": "Try these combos:\n3 Scoops + 3 Toppings\n1 Sizzling Brownie + 2 Milkshakes\nBanana Split + Thickshake\nPerfect for group hangouts in Madhapur.",
+          "author": "Frocone Team",
+          "imageUrl": "https://images.unsplash.com/photo-1540575861501-7ad0582371f3?w=800",
+          "excerpt": "Try these combos:\n3 Scoops + 3 Toppings\n1 Sizzling Brownie + 2 Milkshakes\nBanana Split + Thickshake\nPerfect for group hangouts in Madhapur....",
+          "category": "Combos"
+        },
+        {
+          "title": "Late Night Dessert Cravings in Madhapur? We’ve Got You.",
+          "content": "When dinner isn’t enough:\nLotus Biscoff Sundae\nNutella Brownie Thickshake\nDark Temptation\nEnd your night right.",
+          "author": "Frocone Team",
+          "imageUrl": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
+          "excerpt": "When dinner isn’t enough:\nLotus Biscoff Sundae\nNutella Brownie Thickshake\nDark Temptation\nEnd your night right....",
+          "category": "Late Night"
+        },
+        {
+          "title": "Why Sizzling Brownies Are Hyderabad’s Favourite Comfort Dessert",
+          "content": "Hot chocolate sauce poured over a warm brownie topped with melting ice cream.\nThat sound alone wins hearts.",
+          "author": "Frocone Team",
+          "imageUrl": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800",
+          "excerpt": "Hot chocolate sauce poured over a warm brownie topped with melting ice cream.\nThat sound alone wins hearts....",
+          "category": "Brownies"
+        },
+        {
+          "title": "The Ultimate Frocone Menu Guide (Everything You Need to Try Once)",
+          "content": "If you're visiting for the first time:\n✅ Death By Chocolate\n✅ Lotus Biscoff Sundae\n✅ Nutella Brownie Thickshake\n✅ Rose Cardamom Scoop\n✅ Classic Banana Split\nYour dessert journey starts here.",
+          "author": "Frocone Team",
+          "imageUrl": "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=800",
+          "excerpt": "If you're visiting for the first time:\n✅ Death By Chocolate\n✅ Lotus Biscoff Sundae\n✅ Nutella Brownie Thickshake\n✅ Rose Cardamom Scoop\n✅ Classic Banana...",
+          "category": "Guide"
         }
       ];
       for (const blog of blogsData) {

@@ -4,7 +4,7 @@ import { useProducts } from "@/hooks/use-products";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { Button } from "@/components/ui/button";
 
-const CATEGORIES = ["All", "Brownies", "Ice Cream Scoops", "Milkshakes", "Sundaes", "Thickshakes", "Toppings", "Others"];
+const CATEGORIES = ["All", "Brownies", "Ice Cream Scoops", "Milkshakes", "Sundaes", "Thickshakes", "Toppings"];
 
 export default function Menu() {
   const [activeCategory, setActiveCategory] = useState("All");
