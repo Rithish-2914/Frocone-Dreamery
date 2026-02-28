@@ -1,16 +1,26 @@
-import { useQuery } from "@tanstack/react-query";
-import { api } from "@shared/routes";
-import type { TestimonialsListResponse } from "@shared/schema";
+import { type TestimonialResponse } from "@shared/schema";
+
+const testimonialsData: TestimonialResponse[] = [
+  {
+    id: 1,
+    customerName: "Priya Sharma",
+    rating: 5,
+    comment: "Best ice cream in Hyderabad! The mango tango is absolutely divine.",
+    avatar: null,
+    isVerified: true,
+    createdAt: new Date()
+  },
+  {
+    id: 2,
+    customerName: "Rahul Mehta",
+    rating: 5,
+    comment: "The brownie sundae is heaven on a plate. Perfect spot for dessert dates!",
+    avatar: null,
+    isVerified: true,
+    createdAt: new Date()
+  }
+];
 
 export function useTestimonials() {
-  return useQuery({
-    queryKey: [api.testimonials.list.path],
-    queryFn: async () => {
-      const res = await fetch(api.testimonials.list.path, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch testimonials");
-      
-      const data = await res.json();
-      return data as TestimonialsListResponse;
-    },
-  });
+  return { data: testimonialsData, isLoading: false };
 }

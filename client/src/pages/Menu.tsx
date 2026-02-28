@@ -12,15 +12,7 @@ export default function Menu() {
     category: activeCategory === "All" ? undefined : activeCategory 
   });
 
-  // Mock data if empty
-  const displayProducts = products.length > 0 ? products : [
-    { id: 1, name: "Velvet Strawberry", description: "Fresh strawberries blended with real cream.", price: "250", category: "Scoops", imageUrl: "https://images.unsplash.com/photo-1563805042-7684c8a9e9ce?w=800&q=80" },
-    { id: 2, name: "Mint Choco Chip", description: "Cool mint with rich dark chocolate chunks.", price: "280", category: "Scoops", imageUrl: "https://images.unsplash.com/photo-1557142046-c704a3adf364?w=800&q=80" },
-    { id: 3, name: "Death by Chocolate Sundae", description: "Three layers of chocolate joy.", price: "450", category: "Sundaes", imageUrl: "https://images.unsplash.com/photo-1580915411954-282cb1b0d780?w=800&q=80" },
-    { id: 4, name: "Classic Belgian Waffle", description: "Crispy waffle with maple syrup and vanilla.", price: "300", category: "Waffles", imageUrl: "https://images.unsplash.com/photo-1562376552-0d160a2f9fa4?w=800&q=80" },
-    { id: 5, name: "Oreo Mud Shake", description: "Thick shake blended with oreos and cream.", price: "350", category: "Shakes", imageUrl: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=800&q=80" },
-    { id: 6, name: "Fudge Brownie", description: "Warm, gooey, melt-in-your-mouth brownie.", price: "180", category: "Brownies", imageUrl: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800&q=80" },
-  ].filter(p => activeCategory === "All" || p.category === activeCategory) as any;
+  const displayProducts = products;
 
   return (
     <div className="pt-28 pb-24 min-h-screen bg-[hsl(var(--background))]">

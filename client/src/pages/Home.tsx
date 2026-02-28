@@ -14,19 +14,8 @@ export default function Home() {
   const { data: products = [], isLoading: productsLoading } = useProducts({ trending: true });
   const { data: testimonials = [], isLoading: testimonialsLoading } = useTestimonials();
 
-  // Fallback mock data if API is empty
-  const displayProducts = products.length > 0 ? products.slice(0, 4) : [
-    { id: 1, name: "Velvet Strawberry", description: "Fresh strawberries blended with real cream.", price: "250", category: "Scoops", imageUrl: "https://images.unsplash.com/photo-1563805042-7684c8a9e9ce?w=800&q=80", flavorNotes: "Sweet, Tart, Creamy", isTrending: true },
-    { id: 2, name: "Mint Choco Chip", description: "Cool mint with rich dark chocolate chunks.", price: "280", category: "Scoops", imageUrl: "https://images.unsplash.com/photo-1557142046-c704a3adf364?w=800&q=80", flavorNotes: "Refreshing, Rich", badge: "New" },
-    { id: 3, name: "Golden Vanilla", description: "Classic Madagascar vanilla bean.", price: "200", category: "Scoops", imageUrl: "https://images.unsplash.com/photo-1570197571499-166b36435e9f?w=800&q=80" },
-    { id: 4, name: "Caramel Crunch", description: "Salted caramel layered with waffle bits.", price: "320", category: "Sundaes", imageUrl: "https://images.unsplash.com/photo-1580915411954-282cb1b0d780?w=800&q=80", isTrending: true },
-  ] as any;
-
-  const displayTestimonials = testimonials.length > 0 ? testimonials : [
-    { id: 1, customerName: "Rahul Sharma", rating: 5, comment: "Best ice cream in Madhapur! The waffle cones are insanely good." },
-    { id: 2, customerName: "Priya Patel", rating: 5, comment: "Their strawberry velvet literally hits different. Instantly obsessed." },
-    { id: 3, customerName: "Aarav Kumar", rating: 4, comment: "Great vibe, super Instagrammable place and the sundaes are massive." },
-  ] as any;
+  const displayProducts = products.slice(0, 4);
+  const displayTestimonials = testimonials;
 
   return (
     <div className="w-full overflow-hidden">

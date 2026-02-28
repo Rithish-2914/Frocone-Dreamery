@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import {
   Accordion,
@@ -6,12 +5,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Skeleton } from "@/components/ui/skeleton";
+import { useFaqs } from "@/hooks/use-faqs";
 
 export default function FAQ() {
-  const { data: faqs, isLoading } = useQuery({
-    queryKey: ["/api/faqs"],
-  });
+  const { data: faqs = [] } = useFaqs();
 
   return (
     <div className="pt-24 pb-16 min-h-screen bg-white">
@@ -27,26 +24,18 @@ export default function FAQ() {
           </p>
         </motion.div>
 
-        {isLoading ? (
-          <div className="space-y-4">
-            {[1, 2, 3, 4].map((i) => (
-              <Skeleton key={i} className="h-16 w-full rounded-lg" />
-            ))}
-          </div>
-        ) : (
-          <Accordion type="single" collapsible className="w-full">
-            {(Array.isArray(faqs) ? faqs : [])?.map((faq: any) => (
-              <AccordionItem key={faq.id} value={`item-${faq.id}`}>
-                <AccordionTrigger className="text-left font-medium">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-gray-600">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        )}
+        <Accordion type="single" collapsible className="w-full">
+          {faqs.map((faq: any) => (
+            <AccordionItem key={faq.id} value={`item-${faq.id}`}>
+              <AccordionTrigger className="text-left font-medium">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-gray-600">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
     </div>
   );

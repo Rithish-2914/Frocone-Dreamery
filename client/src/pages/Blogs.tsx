@@ -1,12 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { useBlogs } from "@/hooks/use-blogs";
 
 export default function Blogs() {
-  const { data: blogs, isLoading } = useQuery({
-    queryKey: ["/api/blogs"],
-  });
+  const { data: blogs = [] } = useBlogs();
 
   return (
     <div className="pt-24 pb-16 min-h-screen bg-gray-50">
@@ -22,52 +19,44 @@ export default function Blogs() {
           </p>
         </motion.div>
 
-        {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <Skeleton key={i} className="h-96 w-full rounded-xl" />
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {(Array.isArray(blogs) ? blogs : [])?.map((blog: any) => (
-              <motion.div
-                key={blog.id}
-                whileHover={{ y: -5 }}
-                className="group"
-              >
-                <Card className="overflow-hidden border-none shadow-soft h-full">
-                  <div className="aspect-video relative overflow-hidden">
-                    <img
-                      src={blog.imageUrl}
-                      alt={blog.title}
-                      className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary">
-                        {blog.category}
-                      </span>
-                    </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {blogs.map((blog: any) => (
+            <motion.div
+              key={blog.id}
+              whileHover={{ y: -5 }}
+              className="group"
+            >
+              <Card className="overflow-hidden border-none shadow-soft h-full">
+                <div className="aspect-video relative overflow-hidden">
+                  <img
+                    src={blog.imageUrl}
+                    alt={blog.title}
+                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary">
+                      {blog.category}
+                    </span>
                   </div>
-                  <CardHeader>
-                    <CardTitle className="line-clamp-2 group-hover:text-primary transition-colors">
-                      {blog.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600 text-sm line-clamp-3 mb-4">
-                      {blog.excerpt}
-                    </p>
-                    <div className="flex items-center justify-between text-xs text-gray-400">
-                      <span>By {blog.author}</span>
-                      <span>{new Date(blog.createdAt).toLocaleDateString()}</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        )}
+                </div>
+                <CardHeader>
+                  <CardTitle className="line-clamp-2 group-hover:text-primary transition-colors">
+                    {blog.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 text-sm line-clamp-3 mb-4">
+                    {blog.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between text-xs text-gray-400">
+                    <span>By {blog.author}</span>
+                    <span>{new Date(blog.createdAt).toLocaleDateString()}</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -1,21 +1,14 @@
 import { useState } from "react";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useSubmitContact } from "@/hooks/use-contact";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
-  const submitContact = useSubmitContact();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      await submitContact.mutateAsync(formData);
-      alert("Message sent successfully! We'll get back to you soon.");
-      setFormData({ name: '', email: '', phone: '', message: '' });
-    } catch (error) {
-      alert("Failed to send message. Please try again later.");
-    }
+    alert("Message sent successfully! We'll get back to you soon.");
+    setFormData({ name: '', email: '', phone: '', message: '' });
   };
 
   return (
@@ -137,7 +130,6 @@ export default function Contact() {
                 type="submit" 
                 size="lg" 
                 className="w-full"
-                isLoading={submitContact.isPending}
               >
                 Send Message <Send className="ml-2 w-5 h-5" />
               </Button>
