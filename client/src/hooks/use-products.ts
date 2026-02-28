@@ -90,6 +90,23 @@ export function useProducts(filters?: { category?: string; special?: boolean; tr
     });
   });
 
+  MENU_DATA.toppings.forEach(item => {
+    products.push({
+      id: id++,
+      name: item.name,
+      description: `Extra ${item.name} topping`,
+      category: "Toppings",
+      price: item.price.toString(),
+      imageUrl: "https://images.unsplash.com/photo-1590080875515-8a3a8dc3605e?w=800",
+      flavorNotes: "Sweet addition",
+      isSpecial: false,
+      isTrending: false,
+      isFavorite: false,
+      badge: null,
+      createdAt: new Date()
+    });
+  });
+
   if (filters?.category && filters.category !== 'All') {
     products = products.filter(p => p.category === filters.category);
   }
