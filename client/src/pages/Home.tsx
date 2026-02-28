@@ -206,20 +206,30 @@ export default function Home() {
 
       {/* TESTIMONIALS */}
       <section className="py-24 bg-[hsl(var(--background))]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="font-display text-4xl font-bold">Sweet Words</h2>
+            <h2 className="font-display text-4xl font-bold italic">“in sweet words”</h2>
           </div>
           
-          <div className="grid sm:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {displayTestimonials.map((t: any, i: number) => (
-              <div key={t.id} className="bg-white p-8 rounded-3xl shadow-soft text-center flex flex-col items-center">
-                <div className="flex gap-1 mb-4 text-[hsl(var(--accent))]">
-                  {[...Array(t.rating)].map((_, j) => <Star key={j} className="w-5 h-5 fill-current" />)}
+              <motion.div 
+                key={t.id} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-white p-8 rounded-3xl shadow-soft text-center flex flex-col items-center border border-gray-100"
+              >
+                <div className="flex gap-1 mb-4 text-yellow-400">
+                  {[...Array(t.rating)].map((_, j) => <Star key={j} className="w-4 h-4 fill-current" />)}
                 </div>
-                <p className="text-gray-600 mb-6 italic">"{t.comment}"</p>
-                <p className="font-bold font-display mt-auto">{t.customerName}</p>
-              </div>
+                <p className="text-gray-700 mb-6 italic leading-relaxed">"{t.comment}"</p>
+                <div className="mt-auto">
+                  <p className="font-bold font-display text-[hsl(var(--primary))]">{t.customerName}</p>
+                  <p className="text-xs text-gray-400 mt-1">Verified Review</p>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
