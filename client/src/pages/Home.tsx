@@ -62,7 +62,7 @@ export default function Home() {
             </h1>
             
             <p className="text-lg sm:text-xl text-gray-600 mb-10 max-w-lg mx-auto lg:mx-0">
-              Indulge in artisanal, handcrafted ice creams and sundaes that bring pure joy to every moment. Made fresh, meant to be shared.
+              Frocone Creamery was built to create moments — not just desserts. We combine premium ingredients with creative flavours to bring you indulgence at affordable prices.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">

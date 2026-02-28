@@ -1,3 +1,4 @@
+import { MENU_DATA } from "@shared/menu-data";
 import {
   type Product,
   type OrderResponse,
@@ -9,93 +10,100 @@ import {
   type Fest,
 } from "@shared/schema";
 
-// Hardcoded data
-const productsData: Product[] = [
-  {
-    id: 1,
-    name: "Death By Chocolate",
-    description: "Death By Chocolate - Fresh and delicious brownies",
-    category: "Brownies",
-    price: "249",
-    imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
-    flavorNotes: "Delicious brownies",
-    isSpecial: false,
-    isTrending: true,
-    isFavorite: false,
-    badge: null,
-    createdAt: new Date()
-  },
-  {
-    id: 2,
-    name: "Walnut Brownie",
-    description: "Walnut Brownie - Fresh and delicious brownies",
-    category: "Brownies",
-    price: "119",
-    imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
-    flavorNotes: "Delicious brownies",
-    isSpecial: false,
-    isTrending: false,
-    isFavorite: false,
-    badge: null,
-    createdAt: new Date()
-  },
-  {
-    id: 3,
-    name: "ChocoChip Brownie",
-    description: "ChocoChip Brownie - Fresh and delicious brownies",
-    category: "Brownies",
-    price: "119",
-    imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
-    flavorNotes: "Delicious brownies",
-    isSpecial: false,
-    isTrending: false,
-    isFavorite: false,
-    badge: null,
-    createdAt: new Date()
-  },
-  {
-    id: 4,
-    name: "Hazelnut Brownie",
-    description: "Hazelnut Brownie - Fresh and delicious brownies",
-    category: "Brownies",
-    price: "129",
-    imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
-    flavorNotes: "Delicious brownies",
-    isSpecial: false,
-    isTrending: false,
-    isFavorite: false,
-    badge: null,
-    createdAt: new Date()
-  },
-  {
-    id: 5,
-    name: "Sizzling Brownie",
-    description: "Sizzling Brownie - Fresh and delicious brownies",
-    category: "Brownies",
-    price: "269",
-    imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
-    flavorNotes: "Delicious brownies",
-    isSpecial: true,
-    isTrending: false,
-    isFavorite: false,
-    badge: "Popular",
-    createdAt: new Date()
-  },
-  {
-    id: 6,
-    name: "Vanilla",
-    description: "Vanilla - Fresh and delicious ice cream scoops",
-    category: "Ice Cream Scoops",
-    price: "99",
-    imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
-    flavorNotes: "Delicious ice cream scoops",
-    isSpecial: false,
-    isTrending: false,
-    isFavorite: false,
-    badge: null,
-    createdAt: new Date()
-  }
-];
+// Helper to convert menu data to Product format
+function getProductsFromMenu(): Product[] {
+  const products: Product[] = [];
+  let id = 1;
+
+  MENU_DATA.brownies.forEach(item => {
+    products.push({
+      id: id++,
+      name: item.name,
+      description: `${item.name} - Fresh and delicious brownie`,
+      category: "Brownies",
+      price: item.price.toString(),
+      imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
+      flavorNotes: "Rich chocolate goodness",
+      isSpecial: item.name === "Sizzling Brownie",
+      isTrending: item.name === "Death By Chocolate",
+      isFavorite: false,
+      badge: item.name === "Sizzling Brownie" ? "Popular" : null,
+      createdAt: new Date()
+    });
+  });
+
+  MENU_DATA.iceCreamScoops.flavors.forEach(flavor => {
+    products.push({
+      id: id++,
+      name: flavor,
+      description: `${flavor} - Artisanal ice cream scoop`,
+      category: "Ice Cream Scoops",
+      price: MENU_DATA.iceCreamScoops.startingPrice.toString(),
+      imageUrl: "https://images.unsplash.com/photo-1563805042-7684c8a9e9ce?w=800",
+      flavorNotes: "Handcrafted fresh",
+      isSpecial: false,
+      isTrending: false,
+      isFavorite: false,
+      badge: null,
+      createdAt: new Date()
+    });
+  });
+
+  MENU_DATA.sundaes.forEach(item => {
+    products.push({
+      id: id++,
+      name: item.name,
+      description: `${item.name} - Indulgent sundae`,
+      category: "Sundaes",
+      price: item.price.toString(),
+      imageUrl: "https://images.unsplash.com/photo-1580915411954-282cb1b0d780?w=800",
+      flavorNotes: "Pure bliss",
+      isSpecial: item.name === "Lotus Biscoff",
+      isTrending: item.name === "Lotus Biscoff",
+      isFavorite: false,
+      badge: null,
+      createdAt: new Date()
+    });
+  });
+
+  MENU_DATA.milkshakes.flavors.forEach(flavor => {
+    products.push({
+      id: id++,
+      name: flavor,
+      description: `${flavor} - Refreshing milkshake`,
+      category: "Milkshakes",
+      price: MENU_DATA.milkshakes.price.toString(),
+      imageUrl: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=800",
+      flavorNotes: "Cool and creamy",
+      isSpecial: false,
+      isTrending: false,
+      isFavorite: false,
+      badge: null,
+      createdAt: new Date()
+    });
+  });
+
+  MENU_DATA.thickshakes.forEach(item => {
+    products.push({
+      id: id++,
+      name: item.name,
+      description: `${item.name} - Creamy thickshake`,
+      category: "Thickshakes",
+      price: item.price.toString(),
+      imageUrl: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=800",
+      flavorNotes: "Rich and filling",
+      isSpecial: item.name.includes("Nutella"),
+      isTrending: item.name.includes("Nutella"),
+      isFavorite: false,
+      badge: null,
+      createdAt: new Date()
+    });
+  });
+
+  return products;
+}
+
+const productsData: Product[] = getProductsFromMenu();
 
 const testimonialsData: TestimonialResponse[] = [
   {
@@ -118,27 +126,23 @@ const testimonialsData: TestimonialResponse[] = [
   }
 ];
 
-const blogsData: Blog[] = [
-  {
-    id: 1,
-    title: "Frocone Creamery – The Sweetest Spot in Madhapur, Hyderabad",
-    content: "If you're in Madhapur and craving something indulgent, Frocone Creamery is your go-to dessert destination.",
-    author: "Frocone Team",
-    imageUrl: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=800",
-    excerpt: "If you're in Madhapur and craving something indulgent, Frocone Creamery is your go-to dessert destination.",
-    category: "Announcements",
-    createdAt: new Date()
-  }
-];
+const blogsData: Blog[] = MENU_DATA.blogs.map((blog, idx) => ({
+  id: idx + 1,
+  title: blog.title,
+  content: blog.content,
+  author: "Frocone Team",
+  imageUrl: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=800",
+  excerpt: blog.content.substring(0, 100) + "...",
+  category: "Dessert Guide",
+  createdAt: new Date()
+}));
 
-const faqsData: Faq[] = [
-  {
-    id: 1,
-    question: "Do you offer vegan options?",
-    answer: "Yes! We have a range of fruit-based sorbets that are 100% vegan.",
-    category: "Dietary"
-  }
-];
+const faqsData: Faq[] = MENU_DATA.faqs.map((faq, idx) => ({
+  id: idx + 1,
+  question: faq.question,
+  answer: faq.answer,
+  category: "General"
+}));
 
 const festsData: Fest[] = [
   {
