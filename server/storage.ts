@@ -1,115 +1,238 @@
-import { db } from "./db";
 import {
-  products,
-  orders,
-  contactInquiries,
-  testimonials,
-  blogs,
-  faqs,
-  fests,
   type Product,
-  type InsertProduct,
-  type CreateOrderRequest,
   type OrderResponse,
-  type CreateContactRequest,
   type ContactResponse,
   type TestimonialResponse,
   type ProductsQueryParams,
   type Blog,
-  type InsertBlog,
   type Faq,
-  type InsertFaq,
   type Fest,
-  type InsertFest,
 } from "@shared/schema";
-import { eq, and } from "drizzle-orm";
+
+// Hardcoded data
+const productsData: Product[] = [
+  {
+    id: 1,
+    name: "Death By Chocolate",
+    description: "Death By Chocolate - Fresh and delicious brownies",
+    category: "Brownies",
+    price: "249",
+    imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
+    flavorNotes: "Delicious brownies",
+    isSpecial: false,
+    isTrending: true,
+    isFavorite: false,
+    badge: null,
+    createdAt: new Date()
+  },
+  {
+    id: 2,
+    name: "Walnut Brownie",
+    description: "Walnut Brownie - Fresh and delicious brownies",
+    category: "Brownies",
+    price: "119",
+    imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
+    flavorNotes: "Delicious brownies",
+    isSpecial: false,
+    isTrending: false,
+    isFavorite: false,
+    badge: null,
+    createdAt: new Date()
+  },
+  {
+    id: 3,
+    name: "ChocoChip Brownie",
+    description: "ChocoChip Brownie - Fresh and delicious brownies",
+    category: "Brownies",
+    price: "119",
+    imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
+    flavorNotes: "Delicious brownies",
+    isSpecial: false,
+    isTrending: false,
+    isFavorite: false,
+    badge: null,
+    createdAt: new Date()
+  },
+  {
+    id: 4,
+    name: "Hazelnut Brownie",
+    description: "Hazelnut Brownie - Fresh and delicious brownies",
+    category: "Brownies",
+    price: "129",
+    imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
+    flavorNotes: "Delicious brownies",
+    isSpecial: false,
+    isTrending: false,
+    isFavorite: false,
+    badge: null,
+    createdAt: new Date()
+  },
+  {
+    id: 5,
+    name: "Sizzling Brownie",
+    description: "Sizzling Brownie - Fresh and delicious brownies",
+    category: "Brownies",
+    price: "269",
+    imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
+    flavorNotes: "Delicious brownies",
+    isSpecial: true,
+    isTrending: false,
+    isFavorite: false,
+    badge: "Popular",
+    createdAt: new Date()
+  },
+  {
+    id: 6,
+    name: "Vanilla",
+    description: "Vanilla - Fresh and delicious ice cream scoops",
+    category: "Ice Cream Scoops",
+    price: "99",
+    imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
+    flavorNotes: "Delicious ice cream scoops",
+    isSpecial: false,
+    isTrending: false,
+    isFavorite: false,
+    badge: null,
+    createdAt: new Date()
+  }
+];
+
+const testimonialsData: TestimonialResponse[] = [
+  {
+    id: 1,
+    customerName: "Priya Sharma",
+    rating: 5,
+    comment: "Best ice cream in Hyderabad! The mango tango is absolutely divine.",
+    avatar: null,
+    isVerified: true,
+    createdAt: new Date()
+  },
+  {
+    id: 2,
+    customerName: "Rahul Mehta",
+    rating: 5,
+    comment: "The brownie sundae is heaven on a plate. Perfect spot for dessert dates!",
+    avatar: null,
+    isVerified: true,
+    createdAt: new Date()
+  }
+];
+
+const blogsData: Blog[] = [
+  {
+    id: 1,
+    title: "Frocone Creamery – The Sweetest Spot in Madhapur, Hyderabad",
+    content: "If you're in Madhapur and craving something indulgent, Frocone Creamery is your go-to dessert destination.",
+    author: "Frocone Team",
+    imageUrl: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=800",
+    excerpt: "If you're in Madhapur and craving something indulgent, Frocone Creamery is your go-to dessert destination.",
+    category: "Announcements",
+    createdAt: new Date()
+  }
+];
+
+const faqsData: Faq[] = [
+  {
+    id: 1,
+    question: "Do you offer vegan options?",
+    answer: "Yes! We have a range of fruit-based sorbets that are 100% vegan.",
+    category: "Dietary"
+  }
+];
+
+const festsData: Fest[] = [
+  {
+    id: 1,
+    name: "ATMOS 2024",
+    college: "BITS Pilani, Hyderabad",
+    description: "Technical fest with amazing workshops and competitions.",
+    date: "October 18-20, 2024",
+    imageUrl: "https://images.unsplash.com/photo-1540575861501-7ad0582371f3?w=800",
+    contactPerson: "Student Council"
+  }
+];
 
 export interface IStorage {
   getProducts(filters?: ProductsQueryParams): Promise<Product[]>;
   getProduct(id: number): Promise<Product | undefined>;
-  createProduct(product: InsertProduct): Promise<Product>;
-  createOrder(order: CreateOrderRequest): Promise<OrderResponse>;
-  createContactInquiry(inquiry: CreateContactRequest): Promise<ContactResponse>;
+  createProduct(product: any): Promise<Product>;
+  createOrder(order: any): Promise<OrderResponse>;
+  createContactInquiry(inquiry: any): Promise<ContactResponse>;
   getTestimonials(): Promise<TestimonialResponse[]>;
   getBlogs(): Promise<Blog[]>;
   getFaqs(): Promise<Faq[]>;
   getFests(): Promise<Fest[]>;
-  createBlog(blog: InsertBlog): Promise<Blog>;
-  createFaq(faq: InsertFaq): Promise<Faq>;
-  createFest(fest: InsertFest): Promise<Fest>;
+  createBlog(blog: any): Promise<Blog>;
+  createFaq(faq: any): Promise<Faq>;
+  createFest(fest: any): Promise<Fest>;
 }
 
-export class DatabaseStorage implements IStorage {
+export class MemStorage implements IStorage {
   async getProducts(filters?: ProductsQueryParams): Promise<Product[]> {
-    const conditions = [];
-    
+    let filtered = [...productsData];
     if (filters?.category) {
-      conditions.push(eq(products.category, filters.category));
+      filtered = filtered.filter(p => p.category === filters.category);
     }
     if (filters?.special) {
-      conditions.push(eq(products.isSpecial, true));
+      filtered = filtered.filter(p => p.isSpecial);
     }
     if (filters?.trending) {
-      conditions.push(eq(products.isTrending, true));
+      filtered = filtered.filter(p => p.isTrending);
     }
-
-    if (conditions.length > 0) {
-      return await db.select().from(products).where(and(...conditions));
-    }
-    
-    return await db.select().from(products);
+    return filtered;
   }
 
   async getProduct(id: number): Promise<Product | undefined> {
-    const [product] = await db.select().from(products).where(eq(products.id, id));
-    return product;
+    return productsData.find(p => p.id === id);
   }
 
-  async createProduct(product: InsertProduct): Promise<Product> {
-    const [newProduct] = await db.insert(products).values(product).returning();
+  async createProduct(product: any): Promise<Product> {
+    const newProduct = { ...product, id: productsData.length + 1, createdAt: new Date() };
+    productsData.push(newProduct);
     return newProduct;
   }
 
-  async createOrder(order: CreateOrderRequest): Promise<OrderResponse> {
-    const [newOrder] = await db.insert(orders).values(order).returning();
-    return newOrder;
+  async createOrder(order: any): Promise<OrderResponse> {
+    return { ...order, id: Math.floor(Math.random() * 10000), status: "pending", createdAt: new Date() };
   }
 
-  async createContactInquiry(inquiry: CreateContactRequest): Promise<ContactResponse> {
-    const [newInquiry] = await db.insert(contactInquiries).values(inquiry).returning();
-    return newInquiry;
+  async createContactInquiry(inquiry: any): Promise<ContactResponse> {
+    return { ...inquiry, id: Math.floor(Math.random() * 10000), status: "new", createdAt: new Date() };
   }
 
   async getTestimonials(): Promise<TestimonialResponse[]> {
-    return await db.select().from(testimonials).orderBy(testimonials.createdAt);
+    return testimonialsData;
   }
 
   async getBlogs(): Promise<Blog[]> {
-    return await db.select().from(blogs).orderBy(blogs.createdAt);
+    return blogsData;
   }
 
   async getFaqs(): Promise<Faq[]> {
-    return await db.select().from(faqs);
+    return faqsData;
   }
 
   async getFests(): Promise<Fest[]> {
-    return await db.select().from(fests);
+    return festsData;
   }
 
-  async createBlog(blog: InsertBlog): Promise<Blog> {
-    const [result] = await db.insert(blogs).values(blog).returning();
-    return result;
+  async createBlog(blog: any): Promise<Blog> {
+    const newBlog = { ...blog, id: blogsData.length + 1, createdAt: new Date() };
+    blogsData.push(newBlog);
+    return newBlog;
   }
 
-  async createFaq(faq: InsertFaq): Promise<Faq> {
-    const [result] = await db.insert(faqs).values(faq).returning();
-    return result;
+  async createFaq(faq: any): Promise<Faq> {
+    const newFaq = { ...faq, id: faqsData.length + 1 };
+    faqsData.push(newFaq);
+    return newFaq;
   }
 
-  async createFest(fest: InsertFest): Promise<Fest> {
-    const [result] = await db.insert(fests).values(fest).returning();
-    return result;
+  async createFest(fest: any): Promise<Fest> {
+    const newFest = { ...fest, id: festsData.length + 1 };
+    festsData.push(newFest);
+    return newFest;
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage = new MemStorage();
