@@ -22,7 +22,7 @@ function getProductsFromMenu(): Product[] {
       description: `${item.name} - Fresh and delicious brownie`,
       category: "Brownies",
       price: item.price.toString(),
-      imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
+      imageUrl: item.image || "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
       flavorNotes: "Rich chocolate goodness",
       isSpecial: item.name === "Sizzling Brownie",
       isTrending: item.name === "Death By Chocolate",
