@@ -4,7 +4,7 @@ export const MENU_DATA = {
     { name: "Walnut Brownie", price: 119, image: "/images/products/chocolate.jpg" },
     { name: "ChocoChip Brownie", price: 119, image: "/images/products/choco-chip-brownie.jpg" },
     { name: "Hazelnut Brownie", price: 129, image: "/images/products/chocolate.jpg" },
-    { name: "Sizzling Brownie", price: 269, image: "/images/products/chocolate.jpg" },
+    { name: "Sizzling Brownie", price: 269, image: "/images/products/sizzling-brownie.jpg" },
   ],
   iceCreamScoops: {
     startingPrice: 99,
