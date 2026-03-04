@@ -2,17 +2,29 @@ export const MENU_DATA = {
   brownies: [
     { name: "Death By Chocolate", price: 249 },
     { name: "Walnut Brownie", price: 119 },
-    { name: "ChocoChip Brownie", price: 119 },
+    { name: "ChocoChip Brownie", price: 119, image: "/images/products/choco-chip-brownie.jpg" },
     { name: "Hazelnut Brownie", price: 129 },
     { name: "Sizzling Brownie", price: 269 },
   ],
   iceCreamScoops: {
     startingPrice: 99,
     flavors: [
-      "Vanilla", "Chocolate", "Dark Chocolate", "Red Velvet", "Salted Caramel",
-      "Strawberry", "Mango", "Coconut", "Pineapple",
-      "Black Currant", "Blueberry", "Raspberry",
-      "Pista", "Coffee", "Rose Cardamom", "Paan"
+      { name: "Vanilla", image: "/images/products/vanilla.jpg" },
+      { name: "Chocolate", image: "/images/products/chocolate.jpg" },
+      "Dark Chocolate",
+      { name: "Red Velvet", image: "/images/products/red-velvet.jpg" },
+      { name: "Salted Caramel", image: "/images/products/salted-caramel.jpg" },
+      { name: "Strawberry", image: "/images/products/strawberry.jpg" },
+      { name: "Mango", image: "/images/products/mango.jpg" },
+      { name: "Coconut", image: "/images/products/coconut.jpg" },
+      { name: "Pineapple", image: "/images/products/pineapple.jpg" },
+      { name: "Black Currant", image: "/images/products/black-currant.jpg" },
+      { name: "Blueberry", image: "/images/products/blueberry.jpg" },
+      { name: "Raspberry", image: "/images/products/raspberry.jpg" },
+      { name: "Pista", image: "/images/products/pista.jpg" },
+      { name: "Coffee", image: "/images/products/coffee.jpg" },
+      { name: "Rose Cardamom", image: "/images/products/rose-cardamom.jpg" },
+      { name: "Paan", image: "/images/products/paan.jpg" }
     ]
   },
   sundaes: [
@@ -24,14 +36,15 @@ export const MENU_DATA = {
     { name: "Classic Banana Split (Triple)", price: 349 },
     { name: "Blueberry Delight", price: 199 },
     { name: "Butterscotch Toffee", price: 199 },
-    { name: "Strawberry Bliss", price: 199 },
+    { name: "Strawberry Bliss", price: 199, image: "/images/products/strawberry-bliss.jpg" },
     { name: "Kit Kat Wonder", price: 199 },
     { name: "Dry Fruit Medley", price: 229 },
+    { name: "Ferrero Rocher Sundae", price: 249, image: "/images/products/ferrero-rocher.jpg" }
   ],
   milkshakes: {
     price: 219,
     flavors: [
-      "Chocolate", "Strawberry Bliss", "Cookies n’ Cream",
+      "Chocolate", "Strawberry Bliss", { name: "Cookies n’ Cream", image: "/images/products/cookies-cream.jpg" },
       "Peanut Butter Indulgence", "Coffee Lovers",
       "Lotus Biscoff", "Mango", "Blueberry",
       "Pista", "Butterscotch", "Rose Cardamom",
