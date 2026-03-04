@@ -23,13 +23,14 @@ export function useProducts(filters?: { category?: string; special?: boolean; tr
   });
 
   MENU_DATA.iceCreamScoops.flavors.forEach(flavor => {
+    const flavorObj = typeof flavor === "string" ? { name: flavor, image: undefined } : flavor;
     products.push({
       id: id++,
-      name: flavor,
-      description: `${flavor} - Artisanal ice cream scoop`,
+      name: flavorObj.name,
+      description: `${flavorObj.name} - Artisanal ice cream scoop`,
       category: "Ice Cream Scoops",
       price: MENU_DATA.iceCreamScoops.startingPrice.toString(),
-      imageUrl: "https://images.unsplash.com/photo-1563805042-7684c8a9e9ce?w=800",
+      imageUrl: flavorObj.image || "https://images.unsplash.com/photo-1563805042-7684c8a9e9ce?w=800",
       flavorNotes: "Handcrafted fresh",
       isSpecial: false,
       isTrending: false,
@@ -46,7 +47,7 @@ export function useProducts(filters?: { category?: string; special?: boolean; tr
       description: `${item.name} - Indulgent sundae`,
       category: "Sundaes",
       price: item.price.toString(),
-      imageUrl: "https://images.unsplash.com/photo-1580915411954-282cb1b0d780?w=800",
+      imageUrl: item.image || "https://images.unsplash.com/photo-1580915411954-282cb1b0d780?w=800",
       flavorNotes: "Pure bliss",
       isSpecial: item.name === "Lotus Biscoff",
       isTrending: item.name === "Lotus Biscoff",
@@ -57,13 +58,14 @@ export function useProducts(filters?: { category?: string; special?: boolean; tr
   });
 
   MENU_DATA.milkshakes.flavors.forEach(flavor => {
+    const flavorObj = typeof flavor === "string" ? { name: flavor, image: undefined } : flavor;
     products.push({
       id: id++,
-      name: flavor,
-      description: `${flavor} - Refreshing milkshake`,
+      name: flavorObj.name,
+      description: `${flavorObj.name} - Refreshing milkshake`,
       category: "Milkshakes",
       price: MENU_DATA.milkshakes.price.toString(),
-      imageUrl: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=800",
+      imageUrl: flavorObj.image || "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=800",
       flavorNotes: "Cool and creamy",
       isSpecial: false,
       isTrending: false,
@@ -80,10 +82,10 @@ export function useProducts(filters?: { category?: string; special?: boolean; tr
       description: `${item.name} - Creamy thickshake`,
       category: "Thickshakes",
       price: item.price.toString(),
-      imageUrl: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=800",
+      imageUrl: item.image || "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=800",
       flavorNotes: "Rich and filling",
-      isSpecial: item.name.includes("Nutella"),
-      isTrending: item.name.includes("Nutella"),
+      isSpecial: (item.name || "").includes("Nutella"),
+      isTrending: (item.name || "").includes("Nutella"),
       isFavorite: false,
       badge: null,
       createdAt: new Date()
