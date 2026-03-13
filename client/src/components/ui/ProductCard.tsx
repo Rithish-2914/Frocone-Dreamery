@@ -50,15 +50,23 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
 
       {/* Image Container */}
       <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[hsl(var(--background))] mb-4 flex-shrink-0">
-        <img 
-          src={product.imageUrl} 
-          alt={product.name} 
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-        />
+        {product.imageUrl ? (
+          <img 
+            src={product.imageUrl} 
+            alt={product.name} 
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-pink-50 to-purple-50 p-4">
+            <span className="font-display text-center text-[hsl(var(--primary))] text-lg font-bold leading-snug">
+              {product.name}
+            </span>
+          </div>
+        )}
         
         {/* Flavor Notes Overlay */}
         <AnimatePresence>
-          {isHovered && product.flavorNotes && (
+          {isHovered && product.flavorNotes && product.imageUrl && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}

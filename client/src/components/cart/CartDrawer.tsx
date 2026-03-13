@@ -165,11 +165,17 @@ export function CartDrawer() {
                       key={item.productId}
                       className="flex gap-4 bg-white p-3 rounded-2xl shadow-sm border border-gray-100"
                     >
-                      <img 
-                        src={item.imageUrl} 
-                        alt={item.name} 
-                        className="w-20 h-20 object-cover rounded-xl bg-gray-50"
-                      />
+                      {item.imageUrl ? (
+                        <img 
+                          src={item.imageUrl} 
+                          alt={item.name} 
+                          className="w-20 h-20 object-cover rounded-xl bg-gray-50"
+                        />
+                      ) : (
+                        <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center p-2">
+                          <span className="font-display text-[hsl(var(--primary))] text-xs font-bold text-center leading-tight">{item.name}</span>
+                        </div>
+                      )}
                       <div className="flex-1 flex flex-col justify-between">
                         <div className="flex justify-between items-start">
                           <h4 className="font-bold font-display text-gray-800 line-clamp-1">{item.name}</h4>
