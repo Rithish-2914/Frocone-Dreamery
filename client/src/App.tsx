@@ -13,7 +13,6 @@ import Contact from "./pages/Contact";
 import Offers from "./pages/Offers";
 import Blogs from "./pages/Blogs";
 import FAQ from "./pages/FAQ";
-import Fests from "./pages/Fests";
 
 function Router() {
   return (
@@ -26,7 +25,6 @@ function Router() {
         <Route path="/offers" component={Offers} />
         <Route path="/blogs" component={Blogs} />
         <Route path="/faq" component={FAQ} />
-        <Route path="/fests" component={Fests} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
