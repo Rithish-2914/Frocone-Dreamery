@@ -1,9 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ShoppingBag, IceCream } from "lucide-react";
+import { Menu, X, Instagram } from "lucide-react";
+import { SiSwiggy, SiZomato } from "react-icons/si";
 import { useCart } from "@/store/use-cart";
 import { cn } from "@/lib/utils";
+
+const socialLinks = [
+  { icon: Instagram, href: "https://instagram.com/frocone.creamery", label: "Instagram" },
+  { icon: SiSwiggy, href: "https://swiggy.com", label: "Swiggy" },
+  { icon: SiZomato, href: "https://zomato.com", label: "Zomato" },
+];
 
 const links = [
   { name: "Home", href: "/" },
@@ -66,6 +73,20 @@ export function Navbar() {
                 {link.name}
               </Link>
             ))}
+            <div className="flex items-center gap-3 pl-2 border-l border-gray-200">
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={label}
+                  className="text-gray-400 hover:text-[hsl(var(--primary))] transition-colors"
+                >
+                  <Icon className="w-4 h-4" />
+                </a>
+              ))}
+            </div>
           </nav>
 
           {/* Actions */}
@@ -105,6 +126,22 @@ export function Navbar() {
               ))}
             </div>
             
+            {/* Social links in mobile menu */}
+            <div className="flex justify-center gap-6 mt-4">
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={label}
+                  className="text-gray-400 hover:text-[hsl(var(--primary))] transition-colors"
+                >
+                  <Icon className="w-6 h-6" />
+                </a>
+              ))}
+            </div>
+
             {/* Store details in mobile menu */}
             <div className="absolute bottom-10 left-0 right-0 text-center text-gray-500">
               <p className="font-bold mb-2">Visit Us</p>
