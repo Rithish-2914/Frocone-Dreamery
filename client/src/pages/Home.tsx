@@ -1,20 +1,14 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, Star, Instagram } from "lucide-react";
-import { Button, MotionButton } from "@/components/ui/button";
-import { ProductCard } from "@/components/ui/ProductCard";
-import { useProducts } from "@/hooks/use-products";
+import { Button } from "@/components/ui/button";
 import { useTestimonials } from "@/hooks/use-testimonials";
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
   const yHero = useTransform(scrollYProgress, [0, 1], [0, 300]);
   
-  // Fetch bestsellers
-  const { data: products = [], isLoading: productsLoading } = useProducts({ trending: true });
-  const { data: testimonials = [], isLoading: testimonialsLoading } = useTestimonials();
-
-  const displayProducts = products.slice(0, 4);
+  const { data: testimonials = [] } = useTestimonials();
   const displayTestimonials = testimonials;
 
   return (
@@ -68,16 +62,15 @@ export default function Home() {
             style={{ y: yHero }}
             className="relative lg:h-[600px] flex items-center justify-center"
           >
-            {/* hero vibrant colorful ice cream cone */}
             <motion.img 
               animate={{ y: [0, -15, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              src="https://pixabay.com/get/g8caafb185e8bd405000a261ddabf27a20b3aabd26e50c5f6284fde6901a5d1190771d8fd224f4a77dc927c7d92f2f95ce305a3efa90de7c9302d25e7c77cbe4f_1280.jpg" 
-              alt="Delicious Ice Cream Cone"
+              src="/images/storefront.png"
+              alt="Frocone Creamery"
               className="w-full max-w-md mx-auto drop-shadow-2xl rounded-3xl object-cover aspect-[4/5] border-8 border-white"
             />
             
-            {/* Floating Badges */}
+            {/* Floating Badge */}
             <motion.div 
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -101,32 +94,6 @@ export default function Home() {
           <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C50.69,17.43,101.9,32.32,154.54,42.54c54.74,10.6,110.15,18.25,166.85,13.9Z" className="shape-fill" fill="#FFFFFF"></path>
           </svg>
-        </div>
-      </section>
-
-      {/* BEST SELLERS SECTION */}
-      <section className="py-24 bg-white relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">Crowd Favorites</h2>
-            <p className="text-gray-500 text-lg max-w-2xl mx-auto">
-              Our most loved flavors that keep people coming back. Have you tried them all?
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {displayProducts.map((product: any, idx: number) => (
-              <ProductCard key={product.id} product={product} index={idx} />
-            ))}
-          </div>
-
-          <div className="mt-16 text-center">
-            <Link href="/menu">
-              <Button variant="outline" size="lg">
-                View Full Menu
-              </Button>
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -161,7 +128,6 @@ export default function Home() {
           </motion.div>
           
           <div className="relative h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl">
-            {/* about brand promise gelato pouring */}
             <img 
               src="https://pixabay.com/get/ga505b6fa84c1f0fa0ee1bcfa91c7851dbd81292fa275cde22ea173e84a2122ac7556e430a1dc86610739fa48a12efba73599c99c49f7c177c713ad2d33f17749_1280.jpg" 
               alt="Making Ice Cream"
@@ -178,7 +144,6 @@ export default function Home() {
           <p className="text-gray-500 mb-12">Tag <span className="font-bold text-[hsl(var(--primary))]">@frocone.creamery</span> to get featured!</p>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {/* IG gallery images from @frocone.creamery */}
             {[
               "https://images.unsplash.com/photo-1576506295286-5cda18df43e7?w=600&h=600&fit=crop&q=80",
               "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&h=600&fit=crop&q=80",
@@ -213,7 +178,7 @@ export default function Home() {
       <section className="py-24 bg-[hsl(var(--background))]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="font-display text-4xl font-bold italic">“in sweet words”</h2>
+            <h2 className="font-display text-4xl font-bold italic">"in sweet words"</h2>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
